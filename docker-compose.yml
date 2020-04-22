@@ -10,10 +10,13 @@ services:
     volumes:
       - esdata1:/usr/share/elasticsearch/data
   web:
-    image: oclipa/foodtrucks-web
+    build: . # builds a new image
+    #image: oclipa/foodtrucks-web # uses an existing image
     command: python app.py
     depends_on:
       - es
+    environment:
+      - DEBUG=True # set an env var for flask
     ports:
       - 5000:5000
     volumes:
